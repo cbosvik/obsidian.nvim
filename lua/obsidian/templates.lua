@@ -153,12 +153,16 @@ end
 
 ---Insert a template at the given location.
 ---
+---@param note|? Note
+---
 ---@param opts { template_name: string|obsidian.Path, client: obsidian.Client, location: { [1]: integer, [2]: integer, [3]: integer, [4]: integer } } Options.
 ---
 ---@return obsidian.Note
-M.insert_template = function(opts)
+M.insert_template = function(note, opts)
   local buf, win, row, _ = unpack(opts.location)
-  local note = Note.from_buffer(buf)
+  if note == nil then
+    note = Note.from_buffer(buf)
+  end
   local template_path = resolve_template(opts.template_name, opts.client)
 vim.print("title: " .. note.title .. ", id: " .. note.id)
   local insert_lines = {}
