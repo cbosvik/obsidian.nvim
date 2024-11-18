@@ -159,9 +159,8 @@ end
 M.insert_template = function(opts)
   local buf, win, row, _ = unpack(opts.location)
   local note = Note.from_buffer(buf)
-
   local template_path = resolve_template(opts.template_name, opts.client)
-
+vim.print("title: " .. note.title .. ", id: " .. note.id)
   local insert_lines = {}
   local template_file = io.open(tostring(template_path), "r")
   if template_file then
