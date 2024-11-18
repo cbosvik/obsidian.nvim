@@ -49,7 +49,7 @@ end
 M.substitute_template_variables = function(text, client, note)
   local methods = vim.deepcopy(client.opts.templates.substitutions or {})
 
-  vim.print(note.title .. ': on entry')
+  -- vim.print(note.title .. ': on entry')
   if not methods["date"] then
     methods["date"] = function()
       local date_format = client.opts.templates.date_format or "%Y-%m-%d"
@@ -66,7 +66,7 @@ M.substitute_template_variables = function(text, client, note)
 
   if not methods["title"] then
     methods["title"] = note.title or note:display_name()
-    vim.print(note.title .. ': reset title')
+    -- vim.print(note.title .. ': reset title')
   end
 
   if not methods["id"] then
@@ -92,7 +92,7 @@ M.substitute_template_variables = function(text, client, note)
       text = string.sub(text, 1, m_start - 1) .. value .. string.sub(text, m_end + 1)
     end
   end
-vim.print(note, ': after gsub')
+-- vim.print(note, ': after gsub')
   -- Find unknown variables and prompt for them.
   for m_start, m_end in util.gfind(text, "{{[^}]+}}") do
     local key = util.strip_whitespace(string.sub(text, m_start + 2, m_end - 2))
@@ -101,7 +101,7 @@ vim.print(note, ': after gsub')
       text = string.sub(text, 1, m_start - 1) .. value .. string.sub(text, m_end + 1)
     end
   end
-vim.print(note.title .. ': on exit')
+-- vim.print(note.title .. ': on exit')
   return text
 end
 
