@@ -1872,7 +1872,7 @@ end
 Client.write_note_to_buffer = function(self, note, opts)
   local insert_template = require("obsidian.templates").insert_template
   opts = opts or {}
-
+vim.print("title: " .. note.title .. ", id: " .. note.id)
   if opts.template and util.buffer_is_empty(opts.bufnr) then
     note = insert_template {
       template_name = opts.template,
